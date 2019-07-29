@@ -108,7 +108,7 @@ class CloverXmlCoverageCollector
         $filename = $absolutePath;
 
         if ($root !== DIRECTORY_SEPARATOR) {
-            $filename = ltrim($absolutePath, $root);
+            $filename = $this->str_replace_first($root, '', $absolutePath);
         }
 
         return $this->collectCoverage($file, $absolutePath, $filename);
@@ -143,4 +143,13 @@ class CloverXmlCoverageCollector
 
         return $srcFile;
     }
+
+    private function str_replace_first($search, $replace, $subject) {
+        $pos = strpos($subject, $search);
+        if ($pos !== false) {
+            $subject = substr_replace($subject, $replace, $pos, strlen($search));
+        }
+        return $subject;
+    }
+
 }
