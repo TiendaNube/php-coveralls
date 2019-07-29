@@ -108,7 +108,7 @@ class CloverXmlCoverageCollector
         $filename = $absolutePath;
 
         if ($root !== DIRECTORY_SEPARATOR) {
-            $filename = str_replace($root, '', $absolutePath);
+            $filename = ltrim($absolutePath, $root);
         }
 
         return $this->collectCoverage($file, $absolutePath, $filename);
